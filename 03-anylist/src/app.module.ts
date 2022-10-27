@@ -8,12 +8,39 @@ import { join } from 'path';
 import { ItemsModule } from './items/items.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { JwtService } from '@nestjs/jwt';
 
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
 
+    // CONFIGURACION CON AUTORIZACION
+    // GraphQLModule.forRootAsync({
+    //   driver: ApolloDriver,
+    //   imports: [AuthModule],
+    //   inject: [JwtService],
+    //   useFactory: async(jwtService: JwtService) => {
+    //     return {
+    //       playground: false,
+    //       autoSchemaFile: join( process.cwd(), 'src/schema.gql'),
+    //       plugins: [
+    //         ApolloServerPluginLandingPageLocalDefault
+    //       ],
+    //       context({req}) {
+    //         const token = req.headers.authorization?.replace('Bearer ', '');
+    //         if(!token) throw Error('JWT needed');
+
+    //         const payload = jwtService.decode(token);
+    //         if(!payload) throw Error('Valid JWT needed');
+            
+            
+    //       }
+    //     }
+    //   }
+    // }),
+
+    // CONFIGURACION BASICA
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       // debug: false,
@@ -23,7 +50,7 @@ import { AuthModule } from './auth/auth.module';
         ApolloServerPluginLandingPageLocalDefault
       ]        
     }),
-    
+
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
