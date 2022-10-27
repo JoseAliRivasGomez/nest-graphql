@@ -13,6 +13,7 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
+
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       // debug: false,
@@ -22,6 +23,7 @@ import { AuthModule } from './auth/auth.module';
         ApolloServerPluginLandingPageLocalDefault
       ]        
     }),
+    
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
