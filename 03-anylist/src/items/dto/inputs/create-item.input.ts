@@ -9,9 +9,9 @@ export class CreateItemInput {
   @IsString()
   name: string;
 
-  @IsPositive()
-  @Field(() => Float)
-  quantity: number;
+  // @IsPositive()
+  // @Field(() => Float)
+  // quantity: number;
 
   @Field(() => String, {nullable: true})
   @IsString()
